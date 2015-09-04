@@ -39,15 +39,15 @@ def c_to_f(c):
 # software or hardware SPI.
 
 # Raspberry Pi software SPI configuration.
-CLK = 25
-CS  = 24
-DO  = 18
-sensor = MAX31855.MAX31855(CLK, CS, DO)
+#CLK = 25
+#CS  = 24
+#DO  = 18
+#sensor = MAX31855.MAX31855(CLK, CS, DO)
 
 # Raspberry Pi hardware SPI configuration.
-#SPI_PORT   = 0
-#SPI_DEVICE = 0
-#sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+SPI_PORT   = 0
+SPI_DEVICE = 0
+sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # BeagleBone Black software SPI configuration.
 #CLK = 'P9_12'
@@ -61,10 +61,10 @@ sensor = MAX31855.MAX31855(CLK, CS, DO)
 #sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # Loop printing measurements every second.
-print 'Press Ctrl-C to quit.'
+print("Press Ctrl-C to quit.")
 while True:
 	temp = sensor.readTempC()
 	internal = sensor.readInternalC()
-	print 'Thermocouple Temperature: {0:0.3F}*C / {1:0.3F}*F'.format(temp, c_to_f(temp))
-	print '    Internal Temperature: {0:0.3F}*C / {1:0.3F}*F'.format(internal, c_to_f(internal))
+	print("Thermocouple Temperature: {0:8.4f}*C / {1:8.4f}*F".format(temp, c_to_f(temp)))
+	print("    Internal Temperature: {0:8.4f}*C / {1:8.4f}*F".format(internal, c_to_f(internal)))
 	time.sleep(1.0)
